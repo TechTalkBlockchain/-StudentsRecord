@@ -1,0 +1,20 @@
+contract StudentRecords =
+  record register = 
+  {  StudentAddress : address,
+     Name : string,
+     url  : string,
+     age   : int  
+     Department : string,
+     Reg_No : int, }
+     
+  record state = {
+    registers : map(int , register)}
+  
+   entrypoint init() = {registers = {} }
+  
+  entrypoint getStudentRecords(index:int) : register =
+    state.registers [index]
+  
+  stateful entrypoint registerStudentsRecords(index:int,url':string,Name':string) =
+    let register = { StudentAddress = Call.caller, url = url', Name = name', age = age', Department = Department', Reg_No = 0}
+    put(state {registers [index] = register })
